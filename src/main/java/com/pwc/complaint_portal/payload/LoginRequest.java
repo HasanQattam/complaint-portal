@@ -1,5 +1,6 @@
 package com.pwc.complaint_portal.payload;
 
+
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {

@@ -1,7 +1,9 @@
 package com.pwc.complaint_portal.models;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -38,6 +40,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_complaint",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "complaint_id"))
+    private List<Complaint> complaint = new ArrayList<>();
+
 
     public User() {
     }
@@ -87,4 +97,12 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+    public List<Complaint> getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(List<Complaint> complaint) {
+        this.complaint = complaint;
+    }
+
 }

@@ -21,26 +21,27 @@ public class ComplaintController {
 
     private final ComplaintService complaintService;
 
-    //get all complaints
+    //Get all complaints
     @GetMapping()
     @PreAuthorize("hasRole('ADMIN')")
     public List<Complaint> getAllComplaints() {
         return complaintService.findAll();
     }
 
+    //Post complaints
     @PostMapping()
     @PreAuthorize("hasRole('USER')")
     public Complaint createComplaint(@RequestBody ComplaintDto complaint, Principal principal) {
         return complaintService.save(principal, complaint);
     }
-
+    //Get complaints by user ID
     @GetMapping("userId/{userId}")
     @PreAuthorize("hasRole('USER')")
     public List<Complaint> byUserId(@PathVariable("userId") Long userId) {
         return complaintService.findAllByUserId(userId);
     }
 
-    //update complaints
+    //Update complaints
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("{id}/{status}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -49,5 +50,12 @@ public class ComplaintController {
             @PathVariable("status") ComplaintStatus status
     ) throws ResourceNotFoundException {
         return complaintService.update(id, status);
+    }
+
+    //Delete complaints by ID
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deleteByUserId(@PathVariable("id") Long id) throws ResourceNotFoundException {
+         complaintService.delete(id);
     }
 }

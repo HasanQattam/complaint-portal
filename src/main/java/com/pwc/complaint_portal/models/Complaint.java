@@ -1,9 +1,16 @@
 package com.pwc.complaint_portal.models;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "complaint")
+@Getter
+@Setter
+@ToString
 public class Complaint {
 
     @Id
@@ -17,49 +24,9 @@ public class Complaint {
     private String complaint;
 
     @Column(name = "status")
-    private String status;
+    private ComplaintStatus status;
 
-    public Complaint() {
-        super();
-    }
-
-    public Complaint(Long id, String complaintTitle, String complaint, String status) {
-        this.id = id;
-        this.complaintTitle = complaintTitle;
-        this.complaint = complaint;
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getComplaintTitle() {
-        return complaintTitle;
-    }
-
-    public void setComplaintTitle(String complaintTitle) {
-        this.complaintTitle = complaintTitle;
-    }
-
-    public String getComplaint() {
-        return complaint;
-    }
-
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    @Column(name = "userId")
+    private Long userId;
 }
 
